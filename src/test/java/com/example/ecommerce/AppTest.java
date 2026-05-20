@@ -38,28 +38,28 @@ class AppTest {
         assertTrue(true);
     }
 
-    // @Test
-    // void testCreateProduct() {
-    //     // ...
-    // }
+    @Test
+    void testCreateProduct() {
+        // ...
+    }
 
-    // @Test
-    // void testGetAllProducts() {
-    //     // ...
-    // }
+    @Test
+    void testGetAllProducts() {
+        //productRepository.getAllProducts();
+    }
 
-    // @Test
-    // void testGetProductById() {
-    //     // ...
-    // }
+    @Test
+    void testGetProductById() {
+        // ...
+    }
 
-    // @Test
-    // void testUpdateProduct() {
-    //     // ...
-    // }
+    @Test
+    void testUpdateProduct() {
+        // ...
+    }
 
-    // @Test
-    // void testDeleteProduct() {
-    //     // ...
-    // }
+    @Test
+    void testDeleteProduct() {
+        // ...
+    }
 }

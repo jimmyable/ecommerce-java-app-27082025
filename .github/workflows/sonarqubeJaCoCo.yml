@@ -1,0 +1,64 @@
+name: SonarQube Analysis with Coverage
+
+
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+
+jobs:
+  sonarqube:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+
+      # STEP 1: Maven build + tests
+      # JaCoCo plugin generates target/site/jacoco/jacoco.xml here
+      - name: Build and run tests
+        run: mvn clean test
+
+
+      # STEP 2: SonarQube scan
+      # Reads jacoco.xml generated in the previous step
+      # sonar-project.properties must include:
+      #   sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+
+      # STEP 3: Quality Gate check
+      # Fails the workflow if the coverage condition is not met
+      - name: Check Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
