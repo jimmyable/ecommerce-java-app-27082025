@@ -2,7 +2,7 @@ package com.example.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.h2.security.SHA256;
+//import org.h2.security.SHA256;
 
 /**
  * Hello world!
@@ -15,10 +15,10 @@ public class App
     {
         SpringApplication.run(App.class, args);
 
-        String inputString = "s3cr37";
-        byte[] key         = inputString.getBytes();
+        String inputPassword = "s3cr37";
+        //byte[] key         = inputString.getBytes();
 
-        SHA256.getHMAC(key, message);  // Noncompliant
+        // SHA256.getHMAC(key, message);  // Noncompliant
 
     }
 }
