@@ -20,9 +20,6 @@ public class App
 
         SHA256.getHMAC(key, message);  // Noncompliant
 
-        //TODO big security flaw
-
-//TODO another big issue
     }
 }
 
