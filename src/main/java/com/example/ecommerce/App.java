@@ -14,15 +14,19 @@ public class App
     public static void main( String[] args )
     {
         SpringApplication.run(App.class, args);
+
+        String inputString = "s3cr37";
+        byte[] key         = inputString.getBytes();
+
+        SHA256.getHMAC(key, message);  // Noncompliant
+
+        //TODO big security flaw
+
+//TODO another big issue
     }
 }
 
-//TODO big security flaw
 
-//TODO another big issue
 
-String inputString = "s3cr37";
-byte[] key         = inputString.getBytes();
 
-SHA256.getHMAC(key, message);  // Noncompliant
 
