@@ -17,7 +17,7 @@ public class App
     }
 }
 
-
+//TODO big security flaw
 
 String inputString = "s3cr37";
 byte[] key         = inputString.getBytes();
